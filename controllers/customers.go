@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-schedule/models"
 	customers "go-schedule/services"
@@ -8,7 +9,12 @@ import (
 )
 
 func Get_all_customer(c *gin.Context) {
-	data := customers.Get_all()
+	data, err := customers.Get_all()
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data"})
+		return
+	}
 	c.IndentedJSON(http.StatusOK, gin.H{"data": data})
 }
 

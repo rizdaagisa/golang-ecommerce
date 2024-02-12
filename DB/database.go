@@ -14,7 +14,7 @@ const (
 	port     = ""
 )
 
-func GetConnection() *sql.DB {
+func Connect() *sql.DB {
 	dbAuth := fmt.Sprintf("odbc:server=%s;user id=%s;password=%s;database=%s", host, username, password, dbName)
 	open, err := sql.Open("sqlserver", dbAuth)
 	if err != nil {
