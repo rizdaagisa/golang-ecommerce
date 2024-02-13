@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-schedule/models"
-	customers "go-schedule/services"
+	"go-schedule/services/customers"
 	"net/http"
 )
 
@@ -32,4 +32,24 @@ func Create_customer(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusCreated, gin.H{"message": "Customer inserted successfully"})
+}
+
+func Export_customer(c *gin.Context) {
+	err := customers.Export_DB()
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data"})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{"Message": "Succsessfully Exported"})
+}
+
+func Import_customer(c *gin.Context) {
+	err := customers.Import_DB()
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to retrieve data"})
+		return
+	}
+	c.IndentedJSON(http.StatusOK, gin.H{"Message": "Succsessfully Imported"})
 }

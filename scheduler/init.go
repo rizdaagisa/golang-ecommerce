@@ -4,7 +4,7 @@ import (
 	"fmt"
 	cron "github.com/robfig/cron/v3"
 	"go-schedule/models"
-	customers "go-schedule/services"
+	"go-schedule/services/customers"
 )
 
 func Run() {

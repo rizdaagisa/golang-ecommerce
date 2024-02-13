@@ -18,7 +18,7 @@ func Connect() *sql.DB {
 	dbAuth := fmt.Sprintf("odbc:server=%s;user id=%s;password=%s;database=%s", host, username, password, dbName)
 	open, err := sql.Open("sqlserver", dbAuth)
 	if err != nil {
-		fmt.Println(err.Error())
+		fmt.Println("error while connecting", err.Error())
 		return nil
 	}
 	fmt.Println("Connection succsess")
